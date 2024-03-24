@@ -5,18 +5,15 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    withEnv(["PATH+DOCKER=${tool 'Docker'}/bin"]) {
-                        sh 'docker build -t my-docker-image .'
-                    }
+                    def dockerImage = docker.build('my-docker-image', '.')
                 }
             }
         }
+
         stage('Run Docker Container') {
             steps {
                 script {
-                    withEnv(["PATH+DOCKER=${tool 'Docker'}/bin"]) {
-                        sh 'docker run my-docker-image'
-                    }
+                    dockerImage.run('-p 8081:81')
                 }
             }
         }
