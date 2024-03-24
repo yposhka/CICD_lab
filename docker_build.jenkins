@@ -1,15 +1,19 @@
 pipeline {
     agent any
 
-    environment {
-        docker = 'docker_image_test'
-    }
-
     stages {
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build()
+                    def dockerImage = docker.build('my-docker-image', '.')
+                }
+            }
+        }
+
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    dockerImage.run('-p 8081:81')
                 }
             }
         }
