@@ -18,13 +18,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            script {
-                dockerImage.stop()
-                dockerImage.remove()
-            }
-        }
-    }
 }
