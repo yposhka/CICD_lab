@@ -6,7 +6,7 @@ pipeline {
         stage("Build image") {
             steps {
                 echo "============================== start ================================="
-                dir ('jenkins/') {
+                dir ('jenkins') {
                     sh 'docker build -t cdlab Dockerfile'
                 }
             }
