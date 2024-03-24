@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    environment {
+        docker = 'docker_image_test'
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    docker.build()
+                }
+            }
+        }
+    }
+}
