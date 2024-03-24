@@ -1,13 +1,12 @@
-properties([disableConcurrentBuilds()])
-
+groovy
 pipeline {
     agent any
+
     stages {
-        stage("Build image") {
+        stage('Build Docker Image') {
             steps {
-                echo "============================== start ================================="
-                dir ('jenkins') {
-                    sh 'docker build -t cdlab Dockerfile'
+                script {
+                    bat 'docker build -t myname .'
                 }
             }
         }
